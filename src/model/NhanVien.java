@@ -1,4 +1,8 @@
-public abstract class NhanVien implements Comparable<NhanVien> {
+package model;
+
+import java.io.Serializable;
+
+public abstract class NhanVien implements Comparable<NhanVien>, Serializable {
     private String maNhanVien;
     private String hoTen;
     private int tuoi;
@@ -68,5 +72,16 @@ double a =this.getLuong()-o.getLuong();
         }else {
             return 0;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "NhanVien{" +
+                "maNhanVien='" + maNhanVien + '\'' +
+                ", hoTen='" + hoTen + '\'' +
+                ", tuoi=" + tuoi +
+                ", soDienThoai='" + soDienThoai + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

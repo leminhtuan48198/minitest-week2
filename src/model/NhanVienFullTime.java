@@ -1,4 +1,8 @@
-public class NhanVienFullTime extends NhanVien{
+package model;
+
+import java.io.Serializable;
+
+public class NhanVienFullTime extends NhanVien implements Serializable {
     private double soTienThuong;
     private double soTienPhat;
     private double luongCung;
@@ -17,5 +21,14 @@ public class NhanVienFullTime extends NhanVien{
     @Override
     public double getLuong() {
         return luongCung-soTienPhat+soTienThuong;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+"NhanVienFullTime{" +
+                "soTienThuong=" + soTienThuong +
+                ", soTienPhat=" + soTienPhat +
+                ", luongCung=" + luongCung +
+                '}'+"\n";
     }
 }
