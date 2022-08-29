@@ -13,25 +13,25 @@ public class Main {
             choice=scanner.nextInt();
             switch (choice){
                 case 1:
-                    themNhanVienFullTime();
+                    addEmployeeFullTime();
                     break;
                 case 2:
-                    themNhanVienPartTime();
+                    addEmployeePartTime();
                     break;
                 case 3:
-                    hienThiDanhSachNhanVien();
+                    displayListOfEmployee();
                     break;
                 case 4:
-                    System.out.println("Mức lương trung bình là "+getLuongTrungBinh());
+                    System.out.println("Mức lương trung bình là "+ getAverage());
                     break;
                 case 5:
-                    System.out.println(getDanhSachFullTimeLuongThap());
+                    System.out.println(getListOfEmployeeBelowAverage());
                     break;
                 case 6:
-                    System.out.println("Tổng lương của nhân viên part time là "+getTongLuongPartTime());
+                    System.out.println("Tổng lương của nhân viên part time là "+ getSumPartTime());
                     break;
                 case 7:
-                    System.out.println(sapXepNhanVienFullTimeTheoLuong());
+                    System.out.println(sortEmployeeFullTimeBySalary());
                     break;
                 case 0:
                     System.exit(0);

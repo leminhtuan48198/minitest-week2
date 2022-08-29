@@ -1,8 +1,8 @@
 package controller;
 
-import model.NhanVien;
-import model.NhanVienFullTime;
-import model.NhanVienPartTime;
+import model.Employee;
+import model.EmployeeFullTime;
+import model.EmployeePartTime;
 
 import java.util.*;
 
@@ -11,8 +11,8 @@ import static storage.ReadWriteFile.writeFile;
 
 public class Manager {
 
-    public static List<NhanVien> listOfNhanVien=readFile();
-    public static void themNhanVienFullTime(){
+    public static List<Employee> listOfEmployee =readFile();
+    public static void addEmployeeFullTime(){
         Scanner scanner=new Scanner(System.in);
         System.out.println("Nhập mã nhân viên ");
         String id=scanner.nextLine();
@@ -26,16 +26,16 @@ public class Manager {
         System.out.println("Nhập email ");
         String email=scanner1.nextLine();
         System.out.println("Nhập tiền thưởng");
-        double tienThuong=scanner1.nextDouble();
+        double bonus=scanner1.nextDouble();
         System.out.println("Nhập tiền phạt");
-        double tienPhat=scanner1.nextDouble();
+        double fine=scanner1.nextDouble();
         System.out.println("Nhập lương cứng");
-        double luongCung=scanner1.nextDouble();
-        NhanVienFullTime nhanVienFullTime=new NhanVienFullTime(id,name,age,phoneNumber,email,tienThuong,tienPhat,luongCung);
-        listOfNhanVien.add(nhanVienFullTime);
-        writeFile(listOfNhanVien);
+        double normalSalary=scanner1.nextDouble();
+        EmployeeFullTime employeeFullTime=new EmployeeFullTime(id,name,age,phoneNumber,email,bonus,fine,normalSalary);
+        listOfEmployee.add(employeeFullTime);
+        writeFile(listOfEmployee);
     }
-    public static void themNhanVienPartTime(){
+    public static void addEmployeePartTime(){
         Scanner scanner=new Scanner(System.in);
         System.out.println("Nhập mã nhân viên ");
         String id=scanner.nextLine();
@@ -49,63 +49,63 @@ public class Manager {
         System.out.println("Nhập email ");
         String email=scanner1.nextLine();
         System.out.println("Nhập số giờ làm việc");
-        double hourWork=scanner1.nextDouble();
-        NhanVienPartTime nhanVienPartTime=new NhanVienPartTime(id,name,age,phoneNumber,email,hourWork);
-        listOfNhanVien.add(nhanVienPartTime);
-        writeFile(listOfNhanVien);
+        double timeWork=scanner1.nextDouble();
+        EmployeePartTime employeePartTime=new EmployeePartTime(id,name,age,phoneNumber,email,timeWork);
+        listOfEmployee.add(employeePartTime);
+        writeFile(listOfEmployee);
     }
-    public static void hienThiDanhSachNhanVien(){
-        for (NhanVien nhanVien:listOfNhanVien
+    public static void displayListOfEmployee(){
+        for (Employee employee : listOfEmployee
              ) {
-            System.out.println(nhanVien);
+            System.out.println(employee);
         }
     }
-    public static double getLuongTrungBinh(){
-        double tong=0;
-        for (NhanVien e:listOfNhanVien
+    public static double getAverage(){
+        double sum=0;
+        for (Employee e: listOfEmployee
         ) {
-            tong+=e.getLuong();
+            sum+=e.getSalary();
         }
-        double trungBinh=tong/listOfNhanVien.size();
-        return  trungBinh;
+        double average=sum/ listOfEmployee.size();
+        return  average;
     }
-public static List<NhanVienFullTime> getDanhSachFullTimeLuongThap() {
-    List<NhanVienFullTime> danhSachFullTimeLuongThap = new ArrayList<>();
-    double trungBinh = getLuongTrungBinh();
-    for (NhanVien e : listOfNhanVien
+public static List<EmployeeFullTime> getListOfEmployeeBelowAverage() {
+    List<EmployeeFullTime> listOfEmployeeBelowAverage = new ArrayList<>();
+    double average = getAverage();
+    for (Employee employee : listOfEmployee
     ) {
-        if (e instanceof NhanVienFullTime) {
-            NhanVienFullTime fullTime = (NhanVienFullTime) e;
-            if (fullTime.getLuong() < trungBinh) {
-                danhSachFullTimeLuongThap.add(fullTime);
+        if (employee instanceof EmployeeFullTime) {
+            EmployeeFullTime fullTime = (EmployeeFullTime) employee;
+            if (fullTime.getSalary() < average) {
+                listOfEmployeeBelowAverage.add(fullTime);
             }
 
         }
-    }return  danhSachFullTimeLuongThap;
+    }return  listOfEmployeeBelowAverage;
 }
 
-       public static double getTongLuongPartTime(){
-           double tongPartTime=0;
-           for (NhanVien nhanVien:listOfNhanVien
+       public static double getSumPartTime(){
+           double sumPartTime=0;
+           for (Employee employee : listOfEmployee
            ) {
-               if(nhanVien instanceof NhanVienPartTime){
-                   NhanVienPartTime nhanVienPartTime=(NhanVienPartTime) nhanVien;
-                   tongPartTime+= nhanVienPartTime.getLuong();
+               if(employee instanceof EmployeePartTime){
+                   EmployeePartTime employeePartTime=(EmployeePartTime) employee;
+                   sumPartTime+= employeePartTime.getSalary();
                }
            }
-           return  tongPartTime;
+           return  sumPartTime;
        }
-       public static List<NhanVienFullTime> sapXepNhanVienFullTimeTheoLuong(){
-           List<NhanVienFullTime> nhanVienFullTimes=new ArrayList<>();
-        for (NhanVien nhanVien:listOfNhanVien
+       public static List<EmployeeFullTime> sortEmployeeFullTimeBySalary(){
+           List<EmployeeFullTime> employeeFullTimes=new ArrayList<>();
+        for (Employee employee : listOfEmployee
                 ) {
-               if(nhanVien instanceof NhanVienFullTime){
-                   NhanVienFullTime fullTime=(NhanVienFullTime) nhanVien;
-                   nhanVienFullTimes.add(fullTime);
+               if(employee instanceof EmployeeFullTime){
+                   EmployeeFullTime fullTime=(EmployeeFullTime) employee;
+                   employeeFullTimes.add(fullTime);
                }
            }
-           Collections.sort(nhanVienFullTimes);
-        return nhanVienFullTimes;
+           Collections.sort(employeeFullTimes);
+        return employeeFullTimes;
        }
 
 

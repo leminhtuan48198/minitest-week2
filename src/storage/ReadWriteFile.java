@@ -1,18 +1,18 @@
 package storage;
 
-import model.NhanVien;
+import model.Employee;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReadWriteFile {
-    public static List<NhanVien> readFile(){
-        List<NhanVien> listOfNhanVien =new ArrayList<>();
+    public static List<Employee> readFile(){
+        List<Employee> listOfEmployee =new ArrayList<>();
        try {
            FileInputStream fis = new FileInputStream("nhanvien.txt");
            ObjectInputStream ois = new ObjectInputStream(fis);
-           listOfNhanVien=(List<NhanVien>) ois.readObject();
+           listOfEmployee =(List<Employee>) ois.readObject();
            ois.close();
            fis.close();
        }catch(IOException e){
@@ -21,13 +21,13 @@ public class ReadWriteFile {
         } catch (ClassNotFoundException e) {
            e.printStackTrace();
        }
-       return listOfNhanVien;
+       return listOfEmployee;
     }
-    public static void writeFile(List<NhanVien> listOfNhanVien){
+    public static void writeFile(List<Employee> listOfEmployee){
         try{
             FileOutputStream fos=new FileOutputStream("nhanvien.txt");
             ObjectOutputStream oos=new ObjectOutputStream(fos);
-            oos.writeObject(listOfNhanVien);
+            oos.writeObject(listOfEmployee);
             oos.close();
             fos.close();
         } catch (FileNotFoundException e) {
